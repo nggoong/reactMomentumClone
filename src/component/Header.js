@@ -6,7 +6,7 @@ function Header() {
                     <p>Links</p>
                 </div>
                 <div className = "searchInput">
-                    <input type="text" placeholder="search" name="search"></input>
+                    <input type="text" placeholder="sddd" name="search"></input>
                     <input type="submit"></input>
                 </div>
             </div>
