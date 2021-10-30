@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './component/Header';
 import TimeAndWelcome from './component/TimeAndWelcome';
-import Footer from './component/footer';
+import Footer from './component/Footer';
 import Todo from './component/Todo';
 import './App.css';
 
