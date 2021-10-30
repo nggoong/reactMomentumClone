@@ -1,7 +1,9 @@
 function TodoList() {
     function todoComplete(e) {
         console.log(e.target.innerText);
-        e.target.innerText = "✔";
+        
+        let marker = (e.target.innerText==="▢") ?  "✔" : "▢";
+        e.target.innerText = marker;
     }
     return(
         <div className="TodoListTemplete">

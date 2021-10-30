@@ -158,7 +158,7 @@ html {
   align-items: center;
   z-index:1;
   width:25px;
-  
+  user-select: none;
   /* height: 10%; */
 }
 .TodoList {
@@ -169,4 +169,5 @@ html {
   width:60%;
   height:80%;
   font-size:1.2rem;
+  user-select: none;
 }
