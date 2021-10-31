@@ -140,6 +140,26 @@ html {
 
 .TodoInput {
   height: 10%;
+  position: relative;
+  z-index:1000;
+}
+
+.TodoInputForm {
+  height: 100%;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+.TodoInputForm>.input {
+  background-color:rgba(0, 0, 0, 0.85);
+  font-size:1.2rem;
+  color:var(--white-gray-color);
+  border: none;
+  padding-left:10px;
+  padding-right:10px;
+  height: 80%;
+  width:94%;
 }
 
 .TodoListTemplete {

@@ -6,6 +6,10 @@ function Todo(props) {
     for(let i = 0; i < value.length; i++) {
         list.push(<TodoList key={value[i].id}id={value[i].id}todo={value[i].todo}isComplete={value[i].isComplete}></TodoList>)
     }
+
+    function todoInputSubmit(e) {
+        alert("heeloo");
+    }
     return(
         <div className="Todo">
             <div className="TodoWrapper">
@@ -16,13 +20,13 @@ function Todo(props) {
                     {list}
                 </div>
                 <div className = "TodoInput">
-
+                        <form onSubmit={todoInputSubmit} className="TodoInputForm">
+                            <input type='text' name="todoInput" placeholder="New Todo" className="input" autoComplete="off"></input>
+                        </form>
                 </div>
             </div>
-            
         </div>
     )
-
 }
 
 
