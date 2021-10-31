@@ -10,6 +10,7 @@ function Todo(props) {
     function todoInputSubmit(e) {
         e.preventDefault();
         props.addNewTodo(e.target.todoInput.value);
+        e.target.todoInput.value="";
     }
     return(
         <div className="Todo">
