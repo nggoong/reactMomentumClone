@@ -13,10 +13,17 @@ function App() {
   function todoDialogToggle(isRender) {
       setTodoDialog(isRender);
   }
+  function addNewTodo(value) {
+    let newID = todoListValue.length + 1;
+    let newValue = {id:newID, todo:value, isComplete:false};
+    let tempData = todoListValue.concat(newValue);
+    localStorage.setItem("todoListValue", JSON.stringify(tempData));
+    setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
+  }
   return (
     <div className="App">
       <Header></Header>
-      {todoDialog === true?<Todo value={todoListValue}></Todo>:null}
+      {todoDialog === true?<Todo value={todoListValue} addNewTodo={addNewTodo}></Todo>:null}
       <TimeAndWelcome></TimeAndWelcome>
       <Footer todoIsRender={todoDialog} onRender={todoDialogToggle}></Footer>
     </div>

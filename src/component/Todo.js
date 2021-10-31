@@ -8,7 +8,8 @@ function Todo(props) {
     }
 
     function todoInputSubmit(e) {
-        alert("heeloo");
+        e.preventDefault();
+        props.addNewTodo(e.target.todoInput.value);
     }
     return(
         <div className="Todo">
@@ -20,7 +21,7 @@ function Todo(props) {
                     {list}
                 </div>
                 <div className = "TodoInput">
-                        <form onSubmit={todoInputSubmit} className="TodoInputForm">
+                        <form onSubmit={todoInputSubmit} className="TodoInputForm" method="POST">
                             <input type='text' name="todoInput" placeholder="New Todo" className="input" autoComplete="off"></input>
                         </form>
                 </div>
