@@ -20,10 +20,21 @@ function App() {
     localStorage.setItem("todoListValue", JSON.stringify(tempData));
     setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
   }
+
+  function deleteTodoList(deleteId) {
+    let index = todoListValue.findIndex(i=>i.id == deleteId);
+    let tempData = Array.from(todoListValue);
+    tempData.splice(index, 1);
+    for(let i = index; i<tempData.length; i++) {
+      tempData[i].id = tempData[i].id - 1;
+    }
+    localStorage.setItem("todoListValue", JSON.stringify(tempData));
+    setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
+  }
   return (
     <div className="App">
       <Header></Header>
-      {todoDialog === true?<Todo value={todoListValue} addNewTodo={addNewTodo}></Todo>:null}
+      {todoDialog === true?<Todo value={todoListValue} addNewTodo={addNewTodo}deleteTodoList={deleteTodoList}></Todo>:null}
       <TimeAndWelcome></TimeAndWelcome>
       <Footer todoIsRender={todoDialog} onRender={todoDialogToggle}></Footer>
     </div>
