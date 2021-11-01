@@ -7,12 +7,17 @@ import './App.css';
 
 function App() {
   let [todoDialog, setTodoDialog] = useState(false);
-//   let [todoListValue, setTodoListValue] = useState([{id:1, todo:'리액트 끝내기', isComplete:false},
-// {id:2, todo:'자바스크립트 공부하기', isComplete:false}]);
+  // let [todoListValue, setTodoListValue] = localStorage.getItem("todoListValue") === null ? useState([]) : useState(JSON.parse(localStorage.getItem("todoListValue")));
   let [todoListValue, setTodoListValue] = useState(JSON.parse(localStorage.getItem("todoListValue")));
+  // let [todoListValue, setTodoListValue] = useState([]);
+  // if(JSON.parse(localStorage.getItem("todoListValue")) != null) {
+  //   setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
+  // }
+
   function todoDialogToggle(isRender) {
       setTodoDialog(isRender);
   }
+
   function addNewTodo(value) {
     let newID = todoListValue.length + 1;
     let newValue = {id:newID, todo:value, isComplete:false};

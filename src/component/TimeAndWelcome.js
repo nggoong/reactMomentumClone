@@ -5,12 +5,19 @@ import NicknameInput from './NicknameInput';
 function TimeAndWelcome () {
     let [ currentTime, setCurrentTime ] = useState("");
     let nickName = localStorage.getItem("nickName");
-    let inputOrwelcome = null;
+    let [inputOrWelcome, setInputOrWelcome] = useState(null);
+
+    function changeNickname(e) {
+        localStorage.removeItem("nickName");
+        setInputOrWelcome(<NicknameInput></NicknameInput>)
+        // inputOrWelcome = <NicknameInput></NicknameInput>
+    }
+
     if(nickName === null || nickName == "") {
-        inputOrwelcome = <NicknameInput></NicknameInput>
+        inputOrWelcome = <NicknameInput></NicknameInput>
     }
     else {
-        inputOrwelcome = <div className="welcome">Good morning, {nickName}.</div>
+        inputOrWelcome = <div className="welcome">Good morning, <div className="welcomeNickname" onClick={changeNickname}>{nickName}.</div></div>
     }
 
     function getTime() {
@@ -31,7 +38,7 @@ function TimeAndWelcome () {
                 <div className = "time">
                     {currentTime}
                 </div>
-                {inputOrwelcome}
+                {inputOrWelcome}
             </div>
         </div>
     )
