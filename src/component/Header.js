@@ -1,4 +1,10 @@
+import { BsSearch } from "react-icons/bs";
+
+
 function Header() {
+    function handleSubmit() {
+        alert('submit');
+    }
     return(
         <div className = "Header">
             <div className = "search">
@@ -6,12 +12,12 @@ function Header() {
                     <p>Links</p>
                 </div>
                 <div className = "searchInput">
-                    <input type="text" placeholder="sddd" name="search"></input>
-                    <input type="submit"></input>
+                    <input type="text" placeholder="Google Search" name="search" className="inputForm" autoComplete="off"></input>
+                    <div className="searchIcon" onClick={handleSubmit}><BsSearch/></div>
                 </div>
             </div>
             <div className = "weather">
-                10℃
+                <BsSearch/>
             </div>
         </div>
     )
