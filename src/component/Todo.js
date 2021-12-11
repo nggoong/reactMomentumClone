@@ -1,21 +1,21 @@
 import TodoList from './TodoList';
 
-function Todo(props) {
-    let value = Array.from(props.value);
+function Todo({ value, changeTheIsComplete, deleteTodoList, addNewTodo }) {
+    let arr = Array.from(value);
     let list = [];
-    for(let i = 0; i < value.length; i++) {
-        list.push(<TodoList key={value[i].id}id={value[i].id}todo={value[i].todo}
-            isComplete={value[i].isComplete} deletePropagation = {deletePropagation}></TodoList>)
+    for(let i = 0; i < arr.length; i++) {
+        list.push(<TodoList key={arr[i].id}id={arr[i].id}todo={arr[i].todo}
+            isComplete={arr[i].isComplete} deletePropagation = {deletePropagation} changeTheIsComplete ={changeTheIsComplete}></TodoList>)
     }
 
     function todoInputSubmit(e) {
         e.preventDefault();
-        props.addNewTodo(e.target.todoInput.value);
+        addNewTodo(e.target.todoInput.value);
         e.target.todoInput.value="";
     }
 
     function deletePropagation(id) {
-        props.deleteTodoList(id);
+        deleteTodoList(id);
     }
     return(
         <div className="Todo">
