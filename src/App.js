@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Header from './component/Header';
 import TimeAndWelcome from './component/TimeAndWelcome';
 import Footer from './component/Footer';
@@ -46,14 +46,9 @@ function App() {
   }
 
   const changeTheIsComplete = useCallback((id)=> {
-    
-    let new_values = JSON.parse(localStorage.getItem('todoListValue'));
-    let temp_value = new_values.map(value=> value.id === id? {...value, isComplete: !value.isComplete}: value);
-    setTodoListValue(temp_value);
-    localStorage.setItem('todoListValue', JSON.stringify('todoListValue'));
-    // localStorage.setItem("todoListValue", JSON.stringify(new_value));
-    // setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
-  }, [])
+    setTodoListValue(todoListValue => todoListValue.map((value)=>{return(value.id == id ? {...value, isComplete: !value.isComplete} : value)
+    }))
+  }, []);
   return (
     <div className="App">
       <Header></Header>
