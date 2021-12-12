@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Header from './component/Header';
 import TimeAndWelcome from './component/TimeAndWelcome';
 import Footer from './component/Footer';
@@ -7,48 +7,50 @@ import './App.css';
 
 function App() {
   let [todoDialog, setTodoDialog] = useState(false);
-  // let [todoListValue, setTodoListValue] = localStorage.getItem("todoListValue") === null ? useState([]) : useState(JSON.parse(localStorage.getItem("todoListValue")));
   let [todoListValue, setTodoListValue] = useState(() => {
     let value = JSON.parse(localStorage.getItem('todoListValue'));
     return value || [];
   });
 
-  let nextID = todoListValue.length + 1;
-  // let [todoListValue, setTodoListValue] = useState([]);
-  // if(JSON.parse(localStorage.getItem("todoListValue")) != null) {
-  //   setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
-  // }
+  let [todoID, setTodoID] = useState(()=>{
+    let value = parseInt(localStorage.getItem('todoID'));
+    return value || 0;
+  })
+
 
   useEffect(()=> {
     localStorage.setItem('todoListValue', JSON.stringify(todoListValue));
-  }, [todoListValue])
+  }, [todoListValue]);
+
+  useEffect(()=> {
+    localStorage.setItem('todoID', todoID);
+    console.log(todoID);
+  }, [todoID]);
 
   function todoDialogToggle(isRender) {
       setTodoDialog(isRender);
   }
 
-  function addNewTodo(value) {
-    let newValue = {id:nextID, todo:value, isComplete:false};
-    let tempData = todoListValue.concat(newValue);
-    localStorage.setItem("todoListValue", JSON.stringify(tempData));
-    setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
-  }
+  const addNewTodo = useCallback((value) => {
+    const newValue = {id:todoID, todo: value, isComplete: false};
+    setTodoListValue(todoListValue => todoListValue.concat(newValue));
+    setTodoID(() => todoID + 1);
+  }, [todoID])
 
-  function deleteTodoList(deleteId) {
-    let index = todoListValue.findIndex(i=>i.id == deleteId);
-    let tempData = Array.from(todoListValue);
-    tempData.splice(index, 1);
-    for(let i = index; i<tempData.length; i++) {
-      tempData[i].id = tempData[i].id - 1;
-    }
-    localStorage.setItem("todoListValue", JSON.stringify(tempData));
-    setTodoListValue(JSON.parse(localStorage.getItem("todoListValue")));
-  }
+  const deleteTodoList = useCallback((id)=> {
+    let index = todoListValue.findIndex(i=>i.id == id);
+    let temp = todoListValue.filter(value=>value.id!=id);
+    for(let i = index; i<temp.length; i++) {
+          temp[i].id = temp[i].id - 1;
+        }
+    setTodoListValue(temp);
+  }, [todoListValue]);
 
   const changeTheIsComplete = useCallback((id)=> {
     setTodoListValue(todoListValue => todoListValue.map((value)=>{return(value.id == id ? {...value, isComplete: !value.isComplete} : value)
     }))
   }, []);
+
   return (
     <div className="App">
       <Header></Header>
